@@ -99,7 +99,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="More Fonts..."
             android:text="Remember me"
             android:textColor="#8C8C8C"
             android:textSize="13dp"
@@ -212,6 +212,7 @@
             android:fontFamily="@font/poppins"
             android:text="Your dont have an account?"
             android:textColor="@color/black"
+
             android:textStyle="bold" />
 
         <TextView
