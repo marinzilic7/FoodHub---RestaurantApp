@@ -13,9 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -27,8 +25,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    GoogleSignInOptions gso;
-    ImageView googleBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
                     String savedPassword = preferences.getString("password", null);
                     if (rememberMe.isChecked()) {
                         SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("email", email);
-                        editor.putString("password", password);
+                        editor.putString("email", savedEmail);
+                        editor.putString("password", savedPassword);
                         editor.apply();
                     }
                     FirebaseUser user = auth.getCurrentUser();
