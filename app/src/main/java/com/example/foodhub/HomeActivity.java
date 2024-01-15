@@ -2,6 +2,7 @@ package com.example.foodhub;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,6 +65,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void startLogoutActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void LogoutBtn(View view){
+        FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

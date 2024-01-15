@@ -24,13 +24,13 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private FirebaseAuth firebaseAuth; //Firebase Authentication instance
+    private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
-        firebaseAuth = FirebaseAuth.getInstance(); //Firebase Authentication instance
+        firebaseAuth = FirebaseAuth.getInstance();
 
         //By signing up you accept the Team of service and Privacy Policy
         CheckBox checkBox = findViewById(R.id.checkedTextView);

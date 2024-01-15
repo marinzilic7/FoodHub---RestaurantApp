@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
                     String savedPassword = preferences.getString("password", null);
                     if (rememberMe.isChecked()) {
                         SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("email", savedEmail);
-                        editor.putString("password", savedPassword);
+                        editor.putString("email", email);
+                        editor.putString("password", password);
                         editor.apply();
                     }
                     FirebaseUser user = auth.getCurrentUser();
@@ -160,4 +160,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
+
+
+
 }
