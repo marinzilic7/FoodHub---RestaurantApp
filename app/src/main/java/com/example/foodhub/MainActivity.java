@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                    preferences.edit().clear().apply(); //fixed
                     String savedEmail = preferences.getString("email", null);
                     String savedPassword = preferences.getString("password", null);
                     if (rememberMe.isChecked()) {
