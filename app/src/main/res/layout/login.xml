@@ -113,7 +113,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginRight="13dp"
             android:fontFamily="@font/poppins"
-            android:onClick="resetEmail"
+            android:onClick="setNewPassword"
             android:text="Forget password?"
             android:textColor="@color/orange"
             android:textSize="13dp"

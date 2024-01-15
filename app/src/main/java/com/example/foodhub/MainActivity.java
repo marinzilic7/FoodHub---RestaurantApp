@@ -2,18 +2,19 @@ package com.example.foodhub;
 
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -23,13 +24,18 @@ import com.google.firebase.auth.FirebaseUser;
 
 
 
+
+
 public class MainActivity extends AppCompatActivity {
 
-
+    FirebaseAuth auth;
+    EditText sentEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+        auth = FirebaseAuth.getInstance();
 
         EditText userEmail = findViewById(R.id.userEmail);
         EditText userPassword = findViewById(R.id.userPassword);
@@ -107,5 +113,51 @@ public class MainActivity extends AppCompatActivity {
     public void startRegisterActivity(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+    }
+
+    public void setNewPassword(View view){
+        openModal();
+    }
+
+    private void openModal(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.password_modal, null);
+        builder.setView(dialogView);
+
+        sentEmail = dialogView.findViewById(R.id.userEmail);
+        Button sendEmailButton = dialogView.findViewById(R.id.sendEmailButton);
+
+       sendEmailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetPassword(v);
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void resetPassword(View view){
+
+        String emailUser = sentEmail.getText().toString();
+
+        if(emailUser.isEmpty()){
+            sentEmail.setError("Type your email");
+        }else{
+            auth.sendPasswordResetEmail(emailUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(MainActivity.this, "Email sent" , Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(MainActivity.this, "Greška", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            });
+        }
     }
 }
