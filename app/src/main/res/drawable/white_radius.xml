@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/white" /> <!-- Boja pozadine, možete je prilagoditi -->
+    <corners android:radius="10dp" /> <!-- Radijus za zaobljenje uglova, prilagodite ga prema potrebi -->
+</shape>
