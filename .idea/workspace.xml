@@ -90,6 +90,11 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\DT User\Desktop\FoodHub\app\src\main\res\mipmap-hdpi" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="WelcomeActivity" type="AndroidRunConfigurationType" factoryName="Android App" temporary="true">
       <module name="FoodHub.app.main" />
