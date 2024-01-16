@@ -28,6 +28,33 @@
         app:layout_constraintStart_toEndOf="@+id/avatarWelcome"
         app:layout_constraintTop_toTopOf="@+id/avatarWelcome" />
 
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:animationCache="false"
+        android:background="@drawable/search_border"
+        android:clickable="false"
+        android:paddingTop="5dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:fadingEdge="vertical"
+        android:goIcon="@drawable/search"
+        android:gravity="end"
+        android:hapticFeedbackEnabled="false"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search..."
+        android:searchIcon="@drawable/search"
+        app:guidelineUseRtl="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeUser"
+        app:theme="@style/AppSearchView">
+    </SearchView>
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
