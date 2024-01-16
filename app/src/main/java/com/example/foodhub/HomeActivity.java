@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,6 +25,10 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+
+        ImageView imageView2 = findViewById(R.id.imageView2);
+        imageView2.setImageResource(R.drawable.home_orange);
+
 
         ImageView avatar = findViewById(R.id.avatarWelcome);
 
@@ -61,6 +67,15 @@ public class HomeActivity extends AppCompatActivity {
         }else{
             startLogoutActivity();
         }
+
+        SearchView searchView = findViewById(R.id.searchView);
+        int searchIconId = searchView.getContext().getResources().getIdentifier("android:id/search_mag_icon", null, null);
+        ImageView searchIcon = searchView.findViewById(searchIconId);
+        searchIcon.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+
+        searchView.setIconifiedByDefault(false);
+        searchView.setIconified(false);
+        searchView.setSubmitButtonEnabled(true);
 
     }
 
