@@ -100,4 +100,11 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AccountActivity.class);
         startActivity(intent);
     }
+
+    public void menuView(View view) {
+        Intent intent = new Intent(HomeActivity.this, MenuActivity.class
+        );
+        startActivity(intent);
+    }
+
 }
