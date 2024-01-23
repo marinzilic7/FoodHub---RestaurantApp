@@ -35,6 +35,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_gravity="end"
+            android:layout_marginTop="15dp"
             android:layout_alignParentEnd="true"
             android:src="@mipmap/x" />
 
@@ -43,10 +44,10 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
-            android:textStyle="bold"
+            android:text="Item Name"
             android:textColor="@color/black"
-            android:textSize="12dp"
-            android:text="Item Name" />
+            android:textSize="15dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textViewPrice"
@@ -54,8 +55,9 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:textColor="@color/orange"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="23dp"
             android:textStyle="bold"
+            android:textSize="15dp"
             android:text="Item Price" />
 
     </RelativeLayout>

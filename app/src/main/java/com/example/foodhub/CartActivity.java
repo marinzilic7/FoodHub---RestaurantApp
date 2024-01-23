@@ -1,9 +1,11 @@
 package com.example.foodhub;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,6 +32,7 @@ public class CartActivity extends AppCompatActivity {
     private RecyclerView recyclerViewCart;
     private CartAdapter cartAdapter;
     private TextView textViewCartEmpty;
+    private ImageView imageViewCartEmpty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,20 +41,21 @@ public class CartActivity extends AppCompatActivity {
 
         recyclerViewCart = findViewById(R.id.recyclerViewMenu);
         textViewCartEmpty = findViewById(R.id.textViewCartEmpty);
+        imageViewCartEmpty = findViewById(R.id.imageViewCartEmpty);
 
-        // Firebase initialization
+        ImageView imageView4 = findViewById(R.id.imageView4);
+        imageView4.setImageResource(R.drawable.order_orange);
+
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         if (currentUser != null) {
             String userId = currentUser.getUid();
             cartRef = FirebaseDatabase.getInstance().getReference("cart").child(userId);
 
-            // Initialize RecyclerView and Adapter
             recyclerViewCart.setLayoutManager(new LinearLayoutManager(this));
             cartAdapter = new CartAdapter(new ArrayList<>(), cartRef);
             recyclerViewCart.setAdapter(cartAdapter);
 
-            // Listen for changes in the cart
             cartRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -64,16 +68,16 @@ public class CartActivity extends AppCompatActivity {
                         }
                     }
 
-                    // Update the adapter with the new list of items
                     cartAdapter.updateData(updatedCartItemList);
 
-                    // Show/hide "Your cart is empty" message based on the data
                     if (updatedCartItemList.isEmpty()) {
                         recyclerViewCart.setVisibility(View.GONE);
                         textViewCartEmpty.setVisibility(View.VISIBLE);
+                        imageViewCartEmpty.setVisibility(View.VISIBLE);
                     } else {
                         recyclerViewCart.setVisibility(View.VISIBLE);
                         textViewCartEmpty.setVisibility(View.GONE);
+                        imageViewCartEmpty.setVisibility(View.GONE);
                     }
                 }
 
@@ -82,8 +86,6 @@ public class CartActivity extends AppCompatActivity {
                     Log.e("CartItem", "Error fetching cart data: " + databaseError.getMessage());
                 }
             });
-        } else {
-            Log.e("CartItem", "User not logged in");
         }
     }
 

@@ -51,6 +51,8 @@ public class MenuActivity extends AppCompatActivity {
     private TextView otherBtn;
     private TextView foodBtn;
     private MenuAdapter menuAdapter;
+    private TextView textViewMenuEmpty;
+    private ImageView imageViewMenuEmpty;
 
     private List<Menu> menuList = new ArrayList<>();
 
@@ -63,6 +65,10 @@ public class MenuActivity extends AppCompatActivity {
         desertBtn = findViewById(R.id.desertBtn);
         otherBtn = findViewById(R.id.otherBtn);
         foodBtn = findViewById(R.id.foodBtn);
+        textViewMenuEmpty = findViewById(R.id.textViewMenuEmpty);
+        imageViewMenuEmpty = findViewById(R.id.imageViewMenuEmpty);
+
+
         ImageView imageView2 = findViewById(R.id.imageView3);
         imageView2.setImageResource(R.drawable.heart_orange);
 
@@ -145,11 +151,28 @@ public class MenuActivity extends AppCompatActivity {
                         RecyclerView recyclerView = findViewById(R.id.recyclerViewMenu);
                         MenuAdapter menuAdapter = new MenuAdapter(filteredMenuList,menuRef);
                         recyclerView.setAdapter(menuAdapter);
+
+                        menuAdapter.updateData(filteredMenuList);
+
+                        if (filteredMenuList.isEmpty()) {
+                            recyclerView.setVisibility(View.GONE);
+                            textViewMenuEmpty.setVisibility(View.VISIBLE);
+                            imageViewMenuEmpty.setVisibility(View.VISIBLE);
+
+                        } else {
+                            recyclerView.setVisibility(View.VISIBLE);
+                            textViewMenuEmpty.setVisibility(View.GONE);
+                            imageViewMenuEmpty.setVisibility(View.GONE);
+                        }
                     }
+
+
+
+
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-                        // Obrada grešaka
+
                     }
                 });
             }
@@ -174,6 +197,19 @@ public class MenuActivity extends AppCompatActivity {
                         RecyclerView recyclerView = findViewById(R.id.recyclerViewMenu);
                         MenuAdapter menuAdapter = new MenuAdapter(filteredMenuList,menuRef);
                         recyclerView.setAdapter(menuAdapter);
+
+                        menuAdapter.updateData(filteredMenuList);
+
+                        if (filteredMenuList.isEmpty()) {
+                            recyclerView.setVisibility(View.GONE);
+                            textViewMenuEmpty.setVisibility(View.VISIBLE);
+                            imageViewMenuEmpty.setVisibility(View.VISIBLE);
+
+                        } else {
+                            recyclerView.setVisibility(View.VISIBLE);
+                            textViewMenuEmpty.setVisibility(View.GONE);
+                            imageViewMenuEmpty.setVisibility(View.GONE);
+                        }
                     }
 
                     @Override
@@ -202,6 +238,19 @@ public class MenuActivity extends AppCompatActivity {
                         RecyclerView recyclerView = findViewById(R.id.recyclerViewMenu);
                         MenuAdapter menuAdapter = new MenuAdapter(filteredMenuList,menuRef);
                         recyclerView.setAdapter(menuAdapter);
+
+                        menuAdapter.updateData(filteredMenuList);
+
+                        if (filteredMenuList.isEmpty()) {
+                            recyclerView.setVisibility(View.GONE);
+                            textViewMenuEmpty.setVisibility(View.VISIBLE);
+                            imageViewMenuEmpty.setVisibility(View.VISIBLE);
+
+                        } else {
+                            recyclerView.setVisibility(View.VISIBLE);
+                            textViewMenuEmpty.setVisibility(View.GONE);
+                            imageViewMenuEmpty.setVisibility(View.GONE);
+                        }
                     }
 
                     @Override
@@ -231,6 +280,19 @@ public class MenuActivity extends AppCompatActivity {
                         MenuAdapter menuAdapter = new MenuAdapter(filteredMenuList,menuRef);
                         recyclerView.setAdapter(menuAdapter);
                         menuAdapter.updateData(filteredMenuList);
+
+                        menuAdapter.updateData(filteredMenuList);
+
+                        if (filteredMenuList.isEmpty()) {
+                            recyclerView.setVisibility(View.GONE);
+                            textViewMenuEmpty.setVisibility(View.VISIBLE);
+                            imageViewMenuEmpty.setVisibility(View.VISIBLE);
+
+                        } else {
+                            recyclerView.setVisibility(View.VISIBLE);
+                            textViewMenuEmpty.setVisibility(View.GONE);
+                            imageViewMenuEmpty.setVisibility(View.GONE);
+                        }
                     }
 
                     @Override
@@ -320,8 +382,9 @@ public class MenuActivity extends AppCompatActivity {
                                                     Menu menu = new Menu(itemId, name, price, category, imageUrl);
                                                     base.child(itemId).setValue(menu);
 
-                                                    menuList.add(menu);
-                                                    menuAdapter.notifyDataSetChanged();
+
+
+
                                                     Toast.makeText(MenuActivity.this, "Successful added", Toast.LENGTH_SHORT).show();
                                                     dialog.dismiss();
                                                 }

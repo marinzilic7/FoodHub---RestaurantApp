@@ -1,5 +1,6 @@
 package com.example.foodhub.adapters;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -148,6 +149,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
             openMenuImage = itemView.findViewById(R.id.openMenuImage);
         }
     }
+
 
 
 
