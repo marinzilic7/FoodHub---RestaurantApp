@@ -23,6 +23,8 @@ public class AccountActivity extends AppCompatActivity {
     }
 
 
+
+
     public void odjava(View view){
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(this, MainActivity.class);
