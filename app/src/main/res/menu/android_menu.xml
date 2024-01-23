@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/change_password"
+        android:title="Change Password " />
+    <item
+        android:id="@+id/logout"
+        android:title="Logout" />
+    <!-- Dodajte još stavki po potrebi -->
+</menu>
