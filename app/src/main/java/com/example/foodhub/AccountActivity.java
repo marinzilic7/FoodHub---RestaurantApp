@@ -127,7 +127,11 @@ public class AccountActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    public void cartView(View view) {
+        Intent intent = new Intent(AccountActivity.this, CartActivity.class
+        );
+        startActivity(intent);
+    }
 
 
 }

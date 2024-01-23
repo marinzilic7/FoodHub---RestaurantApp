@@ -351,5 +351,10 @@ public class MenuActivity extends AppCompatActivity {
         }
     }
 
+    public void cartView(View view) {
+        Intent intent = new Intent(MenuActivity.this, CartActivity.class
+        );
+        startActivity(intent);
+    }
 
 }

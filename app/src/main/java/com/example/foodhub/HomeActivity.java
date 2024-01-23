@@ -107,4 +107,10 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void cartView(View view) {
+        Intent intent = new Intent(HomeActivity.this, CartActivity.class
+        );
+        startActivity(intent);
+    }
+
 }

@@ -129,6 +129,7 @@
             android:id="@+id/imageView4"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:onClick="cartView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView5"
             app:layout_constraintStart_toEndOf="@id/imageView3"
