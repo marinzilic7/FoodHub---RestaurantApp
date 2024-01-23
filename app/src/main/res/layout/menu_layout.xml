@@ -86,7 +86,7 @@
         android:background="@drawable/white_radius_corner"
         android:fontFamily="@font/poppins"
         android:padding="3dp"
-        android:text="Desert"
+        android:text="Dessert"
         android:textAlignment="center"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/drinkBtn"

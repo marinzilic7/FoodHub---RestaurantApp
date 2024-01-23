@@ -52,6 +52,19 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         notifyDataSetChanged();
     }
 
+    public void updateDataFood(List<Menu> newMenuList, String categoryToUpdate) {
+        List<Menu> filteredList = new ArrayList<>();
+
+        for (Menu menu : newMenuList) {
+            if ("food".equals(menu.getCategory())) {
+                filteredList.add(menu);
+            }
+        }
+
+        this.menuList = filteredList;
+        notifyDataSetChanged();
+    }
+
 
 
     @Override
@@ -110,6 +123,18 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         return menuList.size();
     }
 
+    private void updateDataFood(List<Menu> newMenuList) {
+        List<Menu> filteredList = new ArrayList<>();
+
+        for (Menu menu : newMenuList) {
+            if ("food".equals(menu.getCategory())) {
+                filteredList.add(menu);
+            }
+        }
+
+        this.menuList = filteredList;
+        notifyDataSetChanged();
+    }
 
     public static class MenuViewHolder extends RecyclerView.ViewHolder {
         TextView textViewName;
@@ -135,6 +160,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     }
 
     private void deleteMeal(String mealId) {
+
         if (menuRef != null) {
             menuRef.child(mealId).removeValue()
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -147,11 +173,15 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
                                     for (DataSnapshot menuSnapshot : dataSnapshot.getChildren()) {
                                         Menu menu = menuSnapshot.getValue(Menu.class);
+
+
                                         if (menu != null) {
                                             updatedMenuList.add(menu);
                                         }
+                                        updateDataFood(updatedMenuList);
                                     }
-                                    updateData(updatedMenuList);
+
+
                                 }
 
                                 @Override
