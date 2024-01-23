@@ -7,6 +7,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +26,10 @@ import androidx.annotation.NonNull;
 
 
 public class HomeActivity extends AppCompatActivity {
+
+    GoogleSignInOptions gso;
+    GoogleSignInClient gsc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +38,13 @@ public class HomeActivity extends AppCompatActivity {
         ImageView imageView2 = findViewById(R.id.imageView2);
         imageView2.setImageResource(R.drawable.home_orange);
 
+        //Google
+
+
+
+
 
         ImageView avatar = findViewById(R.id.avatarWelcome);
-
-
         TextView welcomeUser = findViewById(R.id.welcomeUser);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 

@@ -44,6 +44,8 @@
         android:fadingEdge="vertical"
         android:goIcon="@drawable/search"
         android:gravity="end"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:hapticFeedbackEnabled="false"
         android:iconifiedByDefault="false"
         android:queryHint="Search..."
@@ -52,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeUser"
-        app:theme="@style/AppSearchView">
+        android:theme="@style/AppSearchView">
     </SearchView>
 
     <androidx.constraintlayout.widget.ConstraintLayout

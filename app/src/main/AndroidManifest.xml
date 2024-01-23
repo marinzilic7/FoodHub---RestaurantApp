@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,6 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodHub"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.gms.signin.client.beg_enabled"
+            android:value="true" />
+        <meta-data
+            android:name="com.google.android.gms.signin.client.package_name"
+            android:value="com.example.foodhub" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -34,6 +43,7 @@
         </activity>
         <activity
             android:name=".HomeActivity"
+
             android:exported="true">
 
         </activity>
