@@ -39,7 +39,7 @@ public class AccountActivity extends AppCompatActivity {
         userEmail = findViewById(R.id.emailUser);
         firstNameText = findViewById(R.id.firstName);
         lastNameText = findViewById(R.id.lastName);
-
+        ImageView avatar = findViewById(R.id.profile);
         //Dohvacanje podataka
 
         auth = FirebaseAuth.getInstance();
@@ -53,11 +53,17 @@ public class AccountActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
+                        String gender = snapshot.child("gender").getValue(String.class);
                         String firstName = snapshot.child("firstName").getValue(String.class);
                         String lastName = snapshot.child("lastName").getValue(String.class);
                         userEmail.setText(user.getEmail());
                         firstNameText.setText(firstName);
                         lastNameText.setText(lastName);
+                        if ("male".equalsIgnoreCase(gender)) {
+                            avatar.setImageResource(R.mipmap.avatar);
+                        } else {
+                            avatar.setImageResource(R.mipmap.girl_avatar);
+                        }
                     } else {
                         Toast.makeText(AccountActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     }
