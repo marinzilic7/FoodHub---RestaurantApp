@@ -51,6 +51,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     public void updateData(List<Menu> newMenuList) {
         this.menuList = newMenuList;
         notifyDataSetChanged();
+        Log.d("MenuAdapter", "Data updated. New list size: " + newMenuList.size());
     }
 
     public void updateDataFood(List<Menu> newMenuList, String categoryToUpdate) {

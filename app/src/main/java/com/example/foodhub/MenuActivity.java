@@ -2,9 +2,11 @@ package com.example.foodhub;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +56,7 @@ public class MenuActivity extends AppCompatActivity {
     private MenuAdapter menuAdapter;
     private TextView textViewMenuEmpty;
     private ImageView imageViewMenuEmpty;
+    private ProgressBar progressBar;
 
     private List<Menu> menuList = new ArrayList<>();
 
@@ -67,6 +71,7 @@ public class MenuActivity extends AppCompatActivity {
         foodBtn = findViewById(R.id.foodBtn);
         textViewMenuEmpty = findViewById(R.id.textViewMenuEmpty);
         imageViewMenuEmpty = findViewById(R.id.imageViewMenuEmpty);
+        progressBar = findViewById(R.id.progressBar);
 
 
         ImageView imageView2 = findViewById(R.id.imageView3);
@@ -115,7 +120,9 @@ public class MenuActivity extends AppCompatActivity {
                     Menu menu = menuSnapshot.getValue(Menu.class);
                     if (menu != null) {
                         filteredMenuList.add(menu);
-                        menuAdapter.notifyDataSetChanged();
+                        Log.d("MenuActivity", "Before updateData: " + menuList.size());
+                        menuAdapter.updateData(filteredMenuList);
+                        Log.d("MenuActivity", "After updateData: " + menuList.size());
                     }
                 }
 
@@ -365,28 +372,29 @@ public class MenuActivity extends AppCompatActivity {
                             if (imageUri != null) {
                                 StorageReference mStorageRef = FirebaseStorage.getInstance().getReference("images");
                                 StorageReference imageRef = mStorageRef.child(UUID.randomUUID().toString());
-
+                                dialog.dismiss();
+                                progressBar.setVisibility(View.VISIBLE);
                                 try {
                                     InputStream inputStream = getContentResolver().openInputStream(imageUri);
                                     UploadTask uploadTask = imageRef.putStream(inputStream);
                                     uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                         @Override
                                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
                                             imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+
                                                 @Override
                                                 public void onSuccess(Uri uri) {
                                                     String imageUrl = uri.toString();
-
+                                                    List<Menu> filteredMenuList = new ArrayList<>();
+                                                    progressBar.setVisibility(View.VISIBLE);
                                                     DatabaseReference base = FirebaseDatabase.getInstance().getReference("menu");
                                                     String itemId = base.push().getKey();
                                                     Menu menu = new Menu(itemId, name, price, category, imageUrl);
                                                     base.child(itemId).setValue(menu);
-
-
-
-
+                                                    progressBar.setVisibility(View.GONE);
+                                                    menuAdapter.updateData(filteredMenuList);
                                                     Toast.makeText(MenuActivity.this, "Successful added", Toast.LENGTH_SHORT).show();
-                                                    dialog.dismiss();
                                                 }
                                             });
                                         }
