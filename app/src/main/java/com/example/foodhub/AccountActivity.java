@@ -96,6 +96,11 @@ public class AccountActivity extends AppCompatActivity {
 
                 final int PASSWORD_ID = R.id.change_password;
                 final int LOGOUT_ID = R.id.logout;
+                if (id == PASSWORD_ID) {
+                    changePassword();
+                }else if(id == LOGOUT_ID){
+                    odjava(view);
+                }
 
                 return true;
             }
@@ -116,6 +121,13 @@ public class AccountActivity extends AppCompatActivity {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
+
+    public void changePassword(){
+        Intent intent = new Intent(this, NewPasswordActivity.class);
+        startActivity(intent);
+    }
+
+
 
 
 }
