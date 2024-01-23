@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.foodhub.R;
+import com.example.foodhub.models.Cart;
 import com.example.foodhub.models.Menu;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -94,6 +95,8 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
                 if (id == delete) {
                     deleteMeal(menuList.get(position).getMealId());
+                }else if(id == cart){
+                    addToCart(menuList.get(position));
                 }
                 return true;
             }
@@ -160,6 +163,34 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                        }
+                    });
+        }
+    }
+
+    private void addToCart(Menu menu) {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+            DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference("cart").child(userId);
+            String itemId = menu.getMealId();
+            String itemName = menu.getName();
+            String itemPrice = menu.getPrice();
+            String imageUrl = menu.getImage();
+            Cart cartItem = new Cart(itemId, itemName, itemPrice, imageUrl);
+            String path = cartRef.child(itemId).toString();
+            cartRef.child(itemId).setValue(cartItem)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.e("Cart", "Dodano je " + itemName + " u košaricu");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.e("Cart", "Greška prilikom dodavanja u košaricu: " + e.getMessage());
                         }
                     });
         }
