@@ -95,9 +95,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         radioGroupGender.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.radioButtonMale) {
-                femaleRadioButton.setChecked(false); // Ako je odabrano muško, postavljamo žensko kao neodabrano
+                femaleRadioButton.setChecked(false);
             } else if (checkedId == R.id.radioButtonFemale) {
-                maleRadioButton.setChecked(false); // Ako je odabrano žensko, postavljamo muško kao neodabrano
+                maleRadioButton.setChecked(false);
             }
         });
 
@@ -115,11 +115,10 @@ public class RegisterActivity extends AppCompatActivity {
                     .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                            String role = "guest";
                             String gender = maleRadioButton.isChecked() ? "Male" : "Female";
-                            // Create a User object and store additional information
-                            User user = new User(firstNameText, lastNameText, emailText, gender);
+                            User user = new User(firstNameText, lastNameText, emailText, passwordText, gender, role);
                             String userId = firebaseUser.getUid();
-                            // Store the user in the Firebase Realtime Database
                             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
                             databaseReference.child(firebaseUser.getUid()).setValue(user);
 
