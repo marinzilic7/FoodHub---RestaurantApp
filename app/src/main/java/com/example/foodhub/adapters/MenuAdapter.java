@@ -184,7 +184,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.e("Cart", "Dodano je " + itemName + " u košaricu");
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
