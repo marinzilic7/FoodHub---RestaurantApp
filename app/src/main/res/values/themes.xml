@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.FoodHub" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:statusBarColor">@color/black</item>
+        <item name="android:windowBackground">#fff</item>
     </style>
 
     <style name="Theme.FoodHub" parent="Base.Theme.FoodHub" />

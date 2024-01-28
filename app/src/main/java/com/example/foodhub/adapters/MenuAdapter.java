@@ -1,6 +1,7 @@
 package com.example.foodhub.adapters;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -16,6 +17,8 @@ import com.bumptech.glide.Glide;
 import com.example.foodhub.R;
 import com.example.foodhub.models.Cart;
 import com.example.foodhub.models.Menu;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,12 +35,16 @@ import java.util.List;
 public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder> {
     private int selectedPosition = RecyclerView.NO_POSITION;
     private List<Menu> menuList;
-
     private DatabaseReference menuRef;
-    public MenuAdapter(List<Menu> menuList,DatabaseReference menuRef) {
+
+    private GoogleSignInAccount googleUser;
+    public MenuAdapter(List<Menu> menuList,DatabaseReference menuRef,GoogleSignInAccount googleUser) {
         this.menuList = menuList;
         this.menuRef = menuRef;
+        this.googleUser = googleUser;
     }
+
+
 
 
     @NonNull
@@ -52,6 +59,10 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         this.menuList = newMenuList;
         notifyDataSetChanged();
         Log.d("MenuAdapter", "Data updated. New list size: " + newMenuList.size());
+    }
+
+    public MenuAdapter(GoogleSignInAccount googleUser) {
+        this.googleUser = googleUser;
     }
 
     public void updateDataFood(List<Menu> newMenuList, String categoryToUpdate) {
@@ -96,6 +107,10 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
     }
 
+    public boolean isUserSignedInWithGoogle() {
+        return googleUser != null;
+    }
+
     private void showPopupMenu(View view, int position) {
         PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
         popupMenu.inflate(R.menu.menu_item_menu);
@@ -109,7 +124,37 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                 final int delete= R.id.delete;
 
                 if (id == delete) {
-                    deleteMeal(menuList.get(position).getMealId());
+                    boolean isUserSignedIn = isUserSignedInWithGoogle();
+
+                    if (isUserSignedIn) {
+                        Toast.makeText(view.getContext(), "User is signed in with Google", Toast.LENGTH_SHORT).show();
+                    } else {
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        DatabaseReference base = FirebaseDatabase.getInstance().getReference("users");
+                        if (user != null) {
+                            String userId = user.getUid();
+                            base.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if (snapshot.exists()) {
+                                        String userRole = snapshot.child("role").getValue(String.class);
+                                        if ("administrator".equalsIgnoreCase(userRole)) {
+                                            deleteMeal(menuList.get(position).getMealId());
+                                        }else{
+                                            Toast.makeText(view.getContext(), "You are not administrator", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    Toast.makeText(view.getContext(), "You are not administrator", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }
+
+
                 }else if(id == cart){
                     addToCart(menuList.get(position));
                 }
@@ -119,6 +164,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
         popupMenu.show();
     }
+
 
     @Override
     public int getItemCount() {

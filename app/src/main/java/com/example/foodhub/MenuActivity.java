@@ -27,6 +27,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodhub.adapters.MenuAdapter;
 import com.example.foodhub.models.Menu;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -73,11 +75,17 @@ public class MenuActivity extends AppCompatActivity {
         imageViewMenuEmpty = findViewById(R.id.imageViewMenuEmpty);
         progressBar = findViewById(R.id.progressBar);
 
-
         ImageView imageView2 = findViewById(R.id.imageView3);
         imageView2.setImageResource(R.drawable.heart_orange);
 
         ImageView addItemIcon = findViewById(R.id.addItem);
+
+
+        GoogleSignInAccount googleUser = GoogleSignIn.getLastSignedInAccount(this);
+        MenuAdapter adapter = new MenuAdapter(googleUser);
+
+
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference base = FirebaseDatabase.getInstance().getReference("users");
@@ -108,7 +116,7 @@ public class MenuActivity extends AppCompatActivity {
         DatabaseReference menuRef = FirebaseDatabase.getInstance().getReference("menu");
 
 
-        menuAdapter = new MenuAdapter(menuList, menuRef);
+        menuAdapter = new MenuAdapter(menuList, menuRef, googleUser);
         recyclerView.setAdapter(menuAdapter);
 
         menuRef.orderByChild("category").equalTo("food").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -127,7 +135,7 @@ public class MenuActivity extends AppCompatActivity {
                 }
 
                 RecyclerView recyclerView = findViewById(R.id.recyclerViewMenu);
-                MenuAdapter menuAdapter = new MenuAdapter(filteredMenuList,menuRef);
+                MenuAdapter menuAdapter = new MenuAdapter(filteredMenuList,menuRef, googleUser);
                 recyclerView.setAdapter(menuAdapter);
             }
 
@@ -156,7 +164,7 @@ public class MenuActivity extends AppCompatActivity {
                             }
                         }
                         RecyclerView recyclerView = findViewById(R.id.recyclerViewMenu);
-                        MenuAdapter menuAdapter = new MenuAdapter(filteredMenuList,menuRef);
+                        MenuAdapter menuAdapter = new MenuAdapter(filteredMenuList,menuRef, googleUser);
                         recyclerView.setAdapter(menuAdapter);
 
                         menuAdapter.updateData(filteredMenuList);
@@ -202,7 +210,7 @@ public class MenuActivity extends AppCompatActivity {
                             }
                         }
                         RecyclerView recyclerView = findViewById(R.id.recyclerViewMenu);
-                        MenuAdapter menuAdapter = new MenuAdapter(filteredMenuList,menuRef);
+                        MenuAdapter menuAdapter = new MenuAdapter(filteredMenuList,menuRef, googleUser);
                         recyclerView.setAdapter(menuAdapter);
 
                         menuAdapter.updateData(filteredMenuList);
@@ -243,7 +251,7 @@ public class MenuActivity extends AppCompatActivity {
                             }
                         }
                         RecyclerView recyclerView = findViewById(R.id.recyclerViewMenu);
-                        MenuAdapter menuAdapter = new MenuAdapter(filteredMenuList,menuRef);
+                        MenuAdapter menuAdapter = new MenuAdapter(filteredMenuList,menuRef, googleUser);
                         recyclerView.setAdapter(menuAdapter);
 
                         menuAdapter.updateData(filteredMenuList);
@@ -284,7 +292,7 @@ public class MenuActivity extends AppCompatActivity {
                             }
                         }
                         RecyclerView recyclerView = findViewById(R.id.recyclerViewMenu);
-                        MenuAdapter menuAdapter = new MenuAdapter(filteredMenuList,menuRef);
+                        MenuAdapter menuAdapter = new MenuAdapter(filteredMenuList,menuRef, googleUser);
                         recyclerView.setAdapter(menuAdapter);
                         menuAdapter.updateData(filteredMenuList);
 
