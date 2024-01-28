@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         Log.d("FirebaseAuth", "signInWithCredential:success");
-                        Toast.makeText(MainActivity.this, "Firebase authentication successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Login successful ", Toast.LENGTH_SHORT).show();
                         navigateToSecondActivity();
                     } else {
                         Log.w("FirebaseAuth", "signInWithCredential:failure", task.getException());
