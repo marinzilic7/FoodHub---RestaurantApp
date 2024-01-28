@@ -38,24 +38,23 @@
         android:animationCache="false"
         android:background="@drawable/search_border"
         android:clickable="false"
-        android:paddingTop="5dp"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:fadingEdge="vertical"
-        android:goIcon="@drawable/search"
-        android:gravity="end"
         android:focusable="false"
         android:focusableInTouchMode="false"
+        android:goIcon="@drawable/search"
+        android:gravity="end"
         android:hapticFeedbackEnabled="false"
         android:iconifiedByDefault="false"
+        android:paddingTop="5dp"
         android:queryHint="Search..."
         android:searchIcon="@drawable/search"
+        android:theme="@style/AppSearchView"
         app:guidelineUseRtl="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeUser"
-        android:theme="@style/AppSearchView">
-    </SearchView>
+        app:layout_constraintTop_toBottomOf="@+id/welcomeUser"></SearchView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -98,6 +97,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
         android:layout_width="0dp"
+        android:elevation="20dp"
         android:layout_height="65dp"
         android:background="@drawable/nav_background"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -156,9 +156,9 @@
         android:layout_marginTop="28dp"
         android:fontFamily="@font/poppins"
         android:text="Today's special"
+        android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
@@ -287,7 +287,8 @@
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="320dp"
+        android:layout_marginTop="50dp"
         android:overScrollMode="never"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
         app:layout_constraintStart_toStartOf="parent"
@@ -295,7 +296,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="320dp"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
@@ -344,6 +345,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
                 app:layout_constraintStart_toEndOf="@+id/cardView2"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -361,11 +363,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="Field Rice"
                 android:fontFamily="@font/poppins"
-                android:textStyle="bold"
+                android:text="Field Rice"
                 android:textColor="@color/black"
                 android:textSize="12dp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
@@ -374,11 +376,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Large Sized Burger"
                 android:fontFamily="@font/poppins"
-                android:textStyle="bold"
+                android:text="Large Sized Burger"
                 android:textColor="@color/black"
                 android:textSize="12dp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/cardView2"
                 app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
@@ -387,11 +389,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Chinese Fried Rice"
                 android:fontFamily="@font/poppins"
-                android:textStyle="bold"
+                android:text="Chinese Fried Rice"
                 android:textColor="@color/black"
                 android:textSize="12dp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/cardView4"
                 app:layout_constraintTop_toBottomOf="@+id/cardView4" />
 
@@ -399,10 +401,10 @@
                 android:id="@+id/textView22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="N2500"
                 android:fontFamily="@font/poppins"
-                android:textStyle="bold"
+                android:text="N2500"
                 android:textColor="@color/orange"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/textView19"
                 app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
@@ -430,8 +432,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </HorizontalScrollView>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
