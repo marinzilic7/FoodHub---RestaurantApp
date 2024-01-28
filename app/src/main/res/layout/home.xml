@@ -54,7 +54,9 @@
         app:guidelineUseRtl="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeUser"></SearchView>
+        app:layout_constraintTop_toBottomOf="@+id/welcomeUser">
+
+    </SearchView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"

@@ -96,12 +96,11 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         SearchView searchView = findViewById(R.id.searchView);
+
         int searchIconId = searchView.getContext().getResources().getIdentifier("android:id/search_mag_icon", null, null);
         ImageView searchIcon = searchView.findViewById(searchIconId);
         searchIcon.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
-
         searchView.setIconifiedByDefault(false);
-        searchView.setIconified(false);
         searchView.setSubmitButtonEnabled(true);
 
     }
