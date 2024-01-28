@@ -66,7 +66,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         googleBtn = findViewById(R.id.googleBtn);
+        GoogleSignInAccount googleUser = GoogleSignIn.getLastSignedInAccount(this);
+        if (googleUser != null) {
+            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            startActivity(intent);
 
+        }
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("978159753139-p6djuobnsrqh2cijkv5nnjbtpo2traf1.apps.googleusercontent.com")
                 .requestEmail()
@@ -77,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         googleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mGoogleSignInClient.signOut();  // Odjava svih naloga pre nego što pokaže prozor za izbor naloga
+                //mGoogleSignInClient.signOut();  // Odjava svih naloga pre nego što pokaže prozor za izbor naloga
                 Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, RC_SIGN_IN);
             }
