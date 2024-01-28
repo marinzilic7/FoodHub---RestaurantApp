@@ -12,6 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,8 +43,9 @@ public class AccountActivity extends AppCompatActivity {
         firstNameText = findViewById(R.id.firstName);
         lastNameText = findViewById(R.id.lastName);
         ImageView avatar = findViewById(R.id.profile);
-        //Dohvacanje podataka
 
+
+        GoogleSignInAccount googleUser = GoogleSignIn.getLastSignedInAccount(this);
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
 
@@ -64,6 +68,22 @@ public class AccountActivity extends AppCompatActivity {
                         } else {
                             avatar.setImageResource(R.mipmap.girl_avatar);
                         }
+                    }else if(googleUser != null){
+                        firstNameText.setText(googleUser.getGivenName());
+                        lastNameText.setText(googleUser.getFamilyName());
+                        userEmail.setText(googleUser.getEmail());
+                        String photoUrl = googleUser.getPhotoUrl() != null
+                                ? googleUser.getPhotoUrl().toString()
+                                : null;
+                        if (photoUrl != null && !photoUrl.isEmpty()) {
+                            Glide.with(AccountActivity.this)
+                                    .load(photoUrl)
+                                    .circleCrop()
+                                    .into(avatar);
+                        }else{
+                            avatar.setImageResource(R.mipmap.avatar);
+
+                        }
                     } else {
                         Toast.makeText(AccountActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     }
@@ -76,8 +96,6 @@ public class AccountActivity extends AppCompatActivity {
             });
 
         }
-
-        //Otvaranje popup
 
         ImageView dots = findViewById(R.id.imageDots);
 

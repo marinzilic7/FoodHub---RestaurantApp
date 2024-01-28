@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
-
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -42,7 +42,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-
+        GoogleSignInAccount googleUser = GoogleSignIn.getLastSignedInAccount(this);
 
         ImageView avatar = findViewById(R.id.avatarWelcome);
         TextView welcomeUser = findViewById(R.id.welcomeUser);
@@ -66,7 +66,22 @@ public class HomeActivity extends AppCompatActivity {
                             avatar.setImageResource(R.mipmap.girl_avatar);
                         }
 
-                    }else{
+                    }else if(googleUser != null){
+                        welcomeUser.setText("Welcome " + googleUser.getDisplayName());
+                        String photoUrl = googleUser.getPhotoUrl() != null
+                                ? googleUser.getPhotoUrl().toString()
+                                : null;
+                        if (photoUrl != null && !photoUrl.isEmpty()) {
+                            Glide.with(HomeActivity.this)
+                                    .load(photoUrl)
+                                    .circleCrop()
+                                    .into(avatar);
+                        }else{
+                            avatar.setImageResource(R.mipmap.avatar);
+
+                        }
+                    }
+                    else{
                         startLogoutActivity();
                     }
                 }
