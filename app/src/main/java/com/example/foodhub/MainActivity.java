@@ -30,6 +30,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import com.example.foodhub.R;
+
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth auth;

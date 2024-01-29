@@ -41,6 +41,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.example.foodhub.R;
+
 public class MenuActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri imageUri;

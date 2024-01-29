@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 
-
+import com.example.foodhub.R;
 
 
 public class HomeActivity extends AppCompatActivity {

@@ -124,7 +124,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                     boolean isUserSignedIn = isUserSignedInWithGoogle();
 
                     if (isUserSignedIn) {
-                        Toast.makeText(view.getContext(), "User is signed in with Google", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(view.getContext(), "You are not administrator", Toast.LENGTH_SHORT).show();
                     } else {
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         DatabaseReference base = FirebaseDatabase.getInstance().getReference("users");

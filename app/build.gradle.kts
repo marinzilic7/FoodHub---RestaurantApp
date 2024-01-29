@@ -5,12 +5,22 @@ plugins {
 
 }
 
+
+
 android {
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("C:\\Users\\marin\\Desktop\\foodhub_rest.jks")
+            keyAlias = "uploud"
+            storePassword = "marin123"
+            keyPassword = "marin123"
+        }
+    }
     namespace = "com.example.foodhub"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.foodhub"
+        applicationId = "com.restoran.foodhub"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
@@ -19,6 +29,8 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -26,6 +38,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
         }
     }
     compileOptions {

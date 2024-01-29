@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import com.example.foodhub.R;
+
 public class NewPasswordActivity extends AppCompatActivity {
     FirebaseAuth auth;
     EditText oldPassword;
