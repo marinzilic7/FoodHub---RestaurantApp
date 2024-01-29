@@ -1,7 +1,5 @@
 package com.example.foodhub.adapters;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -17,7 +15,6 @@ import com.bumptech.glide.Glide;
 import com.example.foodhub.R;
 import com.example.foodhub.models.Cart;
 import com.example.foodhub.models.Menu;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

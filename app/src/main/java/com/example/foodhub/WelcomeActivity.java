@@ -9,6 +9,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class WelcomeActivity extends AppCompatActivity {
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.welcome);
+        welcomeHeading = findViewById(R.id.welcomeHeading);
+        handler.post(runnable);
+    }
+
     TextView welcomeHeading;
     String originalHeading = "Welcome"; // [W,E,L,C,O,M,E]
     int index = 0;
@@ -26,30 +34,15 @@ public class WelcomeActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     Intent intent;
-                    int currentOrientation = getResources().getConfiguration().orientation;
-                    if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
-
-                        intent = new Intent(WelcomeActivity.this, MainActivity.class);
-                        intent.putExtra("isLandscape", true);
-                    } else {
-
-                        intent = new Intent(WelcomeActivity.this, MainActivity.class);
-                    }
-
+                    intent = new Intent(WelcomeActivity.this, MainActivity.class);
                     startActivity(intent);
-                    finish();
+
                 }
             }, 1000);
         }
     };
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.welcome);
-        welcomeHeading = findViewById(R.id.welcomeHeading);
-        handler.post(runnable);
-    }
+
 
 }

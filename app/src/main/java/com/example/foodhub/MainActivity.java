@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,23 +17,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.example.foodhub.models.User;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.identity.BeginSignInRequest;
-import com.google.android.gms.auth.api.identity.Identity;
-import com.google.android.gms.auth.api.identity.SignInClient;
-import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -43,21 +29,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Collections;
-
 
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
     EditText sentEmail;
     ImageView googleBtn;
-    GoogleSignInOptions gso;
-    GoogleSignInClient gsc;
-
-    private FirebaseAuth mAuth;
     private static final int RC_SIGN_IN = 1001;
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -65,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
-
 
         googleBtn = findViewById(R.id.googleBtn);
         GoogleSignInAccount googleUser = GoogleSignIn.getLastSignedInAccount(this);
@@ -81,15 +56,18 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
+        mGoogleSignInClient.signOut();
         googleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //mGoogleSignInClient.signOut();  // Odjava svih naloga pre nego što pokaže prozor za izbor naloga
+                // Google sign in
                 Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, RC_SIGN_IN);
             }
         });
+
+
+
         auth = FirebaseAuth.getInstance();
 
         EditText userEmail = findViewById(R.id.userEmail);
@@ -149,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
         );
         startActivity(intent);
     }
+
+
 
     private void loginUser(String email, String password) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
